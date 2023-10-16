@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XPath Token Highlighter</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <h1> Data Visualizer for the Ground Truth in <a href="https://zenodo.org/record/8040341">MarkupMnA Dataset</a></h1>
+    <div class="data-source">
+      <h2> Data Resoures </h2>
+      <p>Use any contract's HTML file (full dataset with HTML links <a href="https://zenodo.org/record/8040341">here</a>) in addition to the corresponding MarkupLM predictions <a href="https://drive.google.com/drive/u/0/folders/1FZPBE0Eb2OoAfWjAK6yiKSabKkIEO8u_">json files</a></p>
+    </div>
+    <hr class="halving-line">
+    <div class="file-upload">
+      <div class="file-upload-heading">
+        <h2> Instructions </h2>
+        <p> You can visualize the dataset by uploading a HTML file and the corresponding CSV file (Option 1), or by selecting a contract number (Option 2).</p>
+      </div>
+      <div class="file-upload-options">
+        <div class="file-upload-option1">
+          <h3> Option 1 </h3>
+          <p> Step 1:
+            <label class="file-label">
+              Choose a HTML file to highlight:
+            </label>
+            <input type="file" id="html-file-selector"/>
+          </p>
+          <p> Step 2:
+            <label class="file-label">
+              Choose a CSV file containing the ground truth:
+            </label>
+            <input type="file" id="csv-file-selector"/>
+          </p>
+        </div>
+        <div class="file-upload-option2">
+          <h3> Option 2</h3>
+          <p> 
+            <label class="file-label">
+              Choose the contract you want to display:
+            </label>
+            <input id="select-contract" type="text" list="contract-options" placeholder="Pleas select contract no">
+            <datalist id="contract-options"></datalist>
+          </p>
+        </div>
+      </div>
+    </div>
+    <hr class="halving-line">
+    <!-- <p id = "html-preview"></p> -->
+    <div>
+      <p id = 'test'></p>
+
+    </div>
+
+    <hr class="halving-line">
+    <div>
+      <div>
+        <h2>Your HTML document will show below</h2>
+      </div>
+      <div class="document-display">
+        <div class="prediction-category" id="category-div">
+          <table>
+            <tr>
+              <th>Prediction category (segment type)</th>
+              <th>Color</th>
+            </tr>
+            
+            <tr>
+              <td>t (title)</td>
+              <td style="background-color: #FF8C00;">DarkOrange</td>
+            </tr>
+      
+            <tr>
+              <td>tn (title number)</td>
+              <td style="background-color: #E9967A;">DarkSalmon</td>
+            </tr>
+            <tr>
+              <td>n (page number)</td>
+              <td style="background-color: #FFD700;">Gold</td>
+            </tr>
+            <tr>
+              <td>st (section title)</td>
+              <td style="background-color: #F08080;">LightCoral</td>
+            </tr>
+            <tr>
+              <td>sn (section number)</td>
+              <td style="background-color: #CD5C5C;">IndianRed</td>
+            </tr>
+            <tr>
+              <td>sst (sub-section title)</td>
+              <td style="background-color: #DDA0DD;">Plum</td>
+            </tr>
+            <tr>
+              <td>ssn (sub-section number)</td>
+              <td style="background-color: #FA8072;">Salmon</td>
+            </tr>
+            <tr>
+              <td>ssst (sub-sub-section title)</td>
+              <td style="background-color: #5F9EA0;">CadetBlue</td>
+            </tr>
+            <tr>
+              <td>sssn (sub-sub-section number)</td>
+              <td style="background-color: #B0C4DE;">LightSteelBlue</td>
+            </tr>
+            <tr>
+              <td>sssst (sub-sub-sub-section title)</td>
+              <td style="background-color: #98FB98;">PaleGreen</td>
+            </tr>
+            <tr>
+              <td>ssssn (sub-sub-sub-section number)</td>
+              <td style="background-color: #66CDAA;">MediumAquaMarine</td>
+            </tr>
+            <tr>
+              <td>o (outside)</td>
+              <td style="background-color: #DCDCDC;">Gainsboro</td>
+            </tr>
+          </table>
+        </div>
+        <div class="html-display" id="html-div">
+          <p id = "html-preview"></p>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+    <script>
+      const datalist = document.getElementById('contract-options');
+      // Generate 152 options
+      for (let i = 1; i <= 152; i++) {
+        const option = document.createElement('option');
+        option.value = `contract_${i}`;
+        datalist.appendChild(option);
+      }
+      const inputElement = document.getElementById('select-contract');
+      inputElement.setAttribute('list', 'contract-options');
+    </script>
+  </body>
+</html>
